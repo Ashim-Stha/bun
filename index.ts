@@ -7,10 +7,13 @@
 // const msg = read("Hello");
 // console.log(msg);
 
+import figlet from "figlet";
+
 const server = Bun.serve({
   port: 3000,
   fetch(req) {
-    return new Response("hellooo<<");
+    const body = figlet.textSync("Hey");
+    return new Response(body);
   },
 });
 
