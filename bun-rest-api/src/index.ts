@@ -4,7 +4,7 @@ import { plugin } from "./plugin";
 //APPLICATION
 const app = new Elysia()
   .get("/", () => "Hello Luffy")
-
+  .use(plugin)
   .state({
     id: 7,
     name: "Luffy",
