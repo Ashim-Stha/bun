@@ -43,8 +43,29 @@ const app = new Elysia()
     return {
       tracks: ["Dancing Feat", "Sam I"],
     };
-  })
-  .listen(3000);
+  });
+
+app.group("/user", (app) =>
+  app
+    .post("/signin", () => "Sign in route")
+    .post("/signup", () => "Sign up route")
+    .post("/profile", () => "Profile route")
+    .get("/:id", () => "User by id")
+);
+
+app.group("/v1", (app) =>
+  app
+    .get("/", () => "Version 1")
+    .group("/products", (app) =>
+      app
+        .post("/", () => "Create Product")
+        .get("/:id", () => "Get product by id")
+        .put("/:id", () => "Update product by id")
+        .delete("/:id", "Delete product by id")
+    )
+);
+
+app.listen(3000);
 
 console.log(
   `🦊 Elysia is running at ${app.server?.hostname}:${app.server?.port}`
